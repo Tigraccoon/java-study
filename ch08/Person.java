@@ -29,6 +29,7 @@ public class Person {
 		System.out.println("이  름 : " + name);
 		System.out.println("신  장 : " + height);
 		System.out.println("체  중 : " + weight);
+		System.out.println();
 	}
 	
 	
