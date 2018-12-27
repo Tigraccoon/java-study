@@ -1,0 +1,28 @@
+package ch10;
+
+public class StaticMethod {
+	static int a=10;
+	int b=20;
+	
+	public static void printA() {
+		System.out.println(a);
+		StaticMethod s = new StaticMethod();
+		System.out.println(s.b);
+		
+	}
+
+	public void printB() {
+		System.out.println(a);
+		System.out.println(b);
+		
+	}
+	
+	public static void main(String[] args) {
+		printA();
+//		printB(); main 밖에 있어서 static 영역이 아니므로 에러.
+		
+		StaticMethod a = new StaticMethod();
+		a.printB();
+	}
+	
+}
