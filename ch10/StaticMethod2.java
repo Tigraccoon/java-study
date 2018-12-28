@@ -22,8 +22,7 @@ public class StaticMethod2 {
 		System.out.println();
 		
 		non.amistatic();
-		
-		
+
 	}
 	
 	
