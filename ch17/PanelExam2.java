@@ -49,7 +49,7 @@ public class PanelExam2 extends JFrame {
 		
 		add(northPanel,"North");
 		add(westPanel,BorderLayout.WEST);
-		add(b5,"Center");
+		add(b5,"Center");	//Center는 생략가능
 		add(eastPanel,"East");
 		add(b8,"South");
 		
