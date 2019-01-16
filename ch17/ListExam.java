@@ -69,7 +69,7 @@ public class ListExam extends JFrame {
 		tf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				model.addElement(tf.getText());
-				list.setModel(model);
+//				list.setModel(model);
 				tf.setText("");
 				tf.requestFocus();
 			}
@@ -83,7 +83,9 @@ public class ListExam extends JFrame {
 				//setText("문자열") 문자열 내용변경
 				//getText() 입력된 내용 꺼내기
 				model.addElement(tf.getText());	//리스트에 추가
+				System.out.println(model);
 				list.setModel(model);			//리스트 갱신
+				System.out.println(model);
 				tf.setText("");					//텍스트필드 초기화
 				tf.requestFocus();				//입력 포커스 설정
 			}
