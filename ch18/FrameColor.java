@@ -27,7 +27,7 @@ public class FrameColor extends JFrame {
 		}
 		
 		for(int i=0;i<=255;i++) {
-			setSize(i*2,i);			//프레임의 사이즈 변경
+			setSize(+i*2,i);			//프레임의 사이즈 변경
 			setLocation(i*2, i);	//프레임의 좌표값
 			c.setBackground(new Color(255,255,i));	//배경 색상 설정
 			Thread.sleep(1);
