@@ -45,6 +45,7 @@ public class EmpManage {
 	
 	//사원 목록 출력
 	
+	@SuppressWarnings("unchecked")
 	void list() {
 		//사원 목록을 받아옴
 		
