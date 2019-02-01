@@ -84,7 +84,7 @@ public class EmpList extends JFrame {
 		col.add("이름");
 		col.add("입사일");
 		col.add("급여");
-		
+		//리스트 호출
 		list();
 		
 		table = new JTable(model);
