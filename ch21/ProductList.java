@@ -299,5 +299,4 @@ public class ProductList extends JFrame {
 		tfAcc.setText("");
 		tfTot.setText("");
 	}
-	
 }
