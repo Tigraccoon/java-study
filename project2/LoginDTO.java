@@ -9,6 +9,7 @@ public class LoginDTO {
 	private String hp;
 	private String address;
 	private String email;
+	private int amount;
 	private int point;
 	private Date date;
 	private int admin=0;
@@ -18,6 +19,12 @@ public class LoginDTO {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 	public String getPwd() {
 		return pwd;
@@ -71,20 +78,22 @@ public class LoginDTO {
 	@Override
 	public String toString() {
 		return "LoginDTO [id=" + id + ", pwd=" + pwd + ", name=" + name + ", hp=" + hp + ", address=" + address
-				+ ", email=" + email + ", point=" + point + ", date=" + date + ", admin=" + admin + "]";
+				+ ", email=" + email + ", amount=" + amount + ", point=" + point + ", date=" + date + ", admin=" + admin
+				+ "]";
 	}
 	
 	public LoginDTO() {
 	}
 	
-	public LoginDTO(String id, String pwd, String name, String hp, String address, String email, int point, Date date,
-			int admin) {
+	public LoginDTO(String id, String pwd, String name, String hp, String address, String email, int amount, int point,
+			Date date, int admin) {
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
 		this.hp = hp;
 		this.address = address;
 		this.email = email;
+		this.amount = amount;
 		this.point = point;
 		this.date = date;
 		this.admin = admin;
