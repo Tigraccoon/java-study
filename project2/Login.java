@@ -86,10 +86,10 @@ public class Login extends JFrame {
 					ppsm = conn.prepareStatement(sql);
 					ppsm.setString(1, id);
 					ppsm.setString(2, pwd);
-
 					rs = ppsm.executeQuery();
+					
 					if (rs.next()) {
-						if (id == "admin") {
+						if (id.equals("admin")) {
 //							관리자 페이지 출력
 							System.out.println("관리자");
 						} else {

@@ -16,24 +16,6 @@ public class FindIDPWD extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfEmail;
-//	public LoginDTO dto;
-	private LoginDAO dao;
-//	private int response;
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					FindIDPWD frame = new FindIDPWD();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the frame.
@@ -56,15 +38,15 @@ public class FindIDPWD extends JFrame {
 		JButton btnFind = new JButton("Find");
 		btnFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dao = new LoginDAO();
+//				LoginDTO dto = new LoginDTO();
 				int response=0;
 				String email = tfEmail.getText();
+				LoginDAO dao = new LoginDAO();
 				response = dao.findUser(email);
+				
 				if (response == 1) {
-					LoginDTO dto = new LoginDTO();
-					
-					String id = dto.getId();
-					String pwd = dto.getPwd();
+					String id = dao.getId();
+					String pwd = dao.getPwd();
 					JOptionPane.showMessageDialog(FindIDPWD.this, "ID : "+id+"\r\n"+"Password : "+pwd, "Here you are~", 
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();

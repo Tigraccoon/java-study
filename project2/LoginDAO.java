@@ -235,6 +235,15 @@ public class LoginDAO {
 
 		return result;
 	}
+	
+	private String id;		
+	private String pwd;
+	public String getId() {
+		return id;
+	}
+	public String getPwd() {
+		return pwd;
+	}
 
 	@SuppressWarnings("unused")
 	public int findUser(String email) {
@@ -251,8 +260,8 @@ public class LoginDAO {
 			ppsm.setString(1, email);
 			rs = ppsm.executeQuery();
 			if(rs.next()) {
-				String id = rs.getString("id");
-				String pwd = rs.getString("pwd");
+				id = rs.getString("id");
+				pwd = rs.getString("pwd");
 				dto = new LoginDTO(id, pwd);
 				result = 1;
 			} else {

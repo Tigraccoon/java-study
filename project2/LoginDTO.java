@@ -14,8 +14,6 @@ public class LoginDTO {
 	private Date date;		//access date
 	
 	public String getId() {
-		System.out.println("getid");
-		System.out.println(id);
 		return id;
 	}
 	public void setId(String id) {
@@ -76,8 +74,8 @@ public class LoginDTO {
 				+ ", email=" + email + ", amount=" + amount + ", point=" + point + ", date=" + date + "]";
 	}
 	
-	public LoginDTO() {
-	}
+//	public LoginDTO() {
+//	}
 	
 	public LoginDTO(String id, String pwd, String name, String hp, String address, String email, int amount, int point,
 			Date date) {
@@ -102,8 +100,8 @@ public class LoginDTO {
 	public LoginDTO(String id, String pwd) {
 		this.id = id;
 		this.pwd = pwd;
-		System.out.println(id);
-		System.out.println(this.id);
+	}
+	public LoginDTO() {
 	}
 	
 }

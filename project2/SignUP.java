@@ -26,22 +26,6 @@ public class SignUP extends JFrame {
 	private JTextField tfEmail;
 
 	/**
-	 * Launch the application.
-	 */
-	//	public static void main(String[] args) {
-	//		EventQueue.invokeLater(new Runnable() {
-	//			public void run() {
-	//				try {
-	//					SignUP frame = new SignUP();
-	//					frame.setVisible(true);
-	//				} catch (Exception e) {
-	//					e.printStackTrace();
-	//				}
-	//			}
-	//		});
-	//	}
-
-	/**
 	 * Create the frame.
 	 */
 	public SignUP() {
@@ -121,7 +105,7 @@ public class SignUP extends JFrame {
 				LoginDTO dto = new LoginDTO(id, pwd, name, hp, address, email);
 				LoginDAO dao = new LoginDAO();
 				int result = dao.insertUser(dto);
-				if (result == 1) {	//insert가 성공적으로 반영되면?
+				if (result == 1) {	
 					JOptionPane.showMessageDialog(SignUP.this, "Enjoy your Shopping! ", "Succeeded", JOptionPane.PLAIN_MESSAGE);
 					dispose();
 				}
