@@ -3,18 +3,19 @@ package project2;
 import java.sql.Date;
 
 public class LoginDTO {
-	private String id;
-	private String pwd;
-	private String name;
-	private String hp;
-	private String address;
-	private String email;
-	private int amount;
-	private int point;
-	private Date date;
-	private int admin=0;
+	private String id;		//user id
+	private String pwd;		//password
+	private String name;	//name
+	private String hp;		//phone number
+	private String address;	//address
+	private String email;	//e-mail
+	private int amount;		//user amount
+	private int point;		//bonus point
+	private Date date;		//access date
 	
 	public String getId() {
+		System.out.println("getid");
+		System.out.println(id);
 		return id;
 	}
 	public void setId(String id) {
@@ -68,25 +69,18 @@ public class LoginDTO {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public int getAdmin() {
-		return admin;
-	}
-	public void setAdmin(int admin) {
-		this.admin = admin;
-	}
 	
 	@Override
 	public String toString() {
 		return "LoginDTO [id=" + id + ", pwd=" + pwd + ", name=" + name + ", hp=" + hp + ", address=" + address
-				+ ", email=" + email + ", amount=" + amount + ", point=" + point + ", date=" + date + ", admin=" + admin
-				+ "]";
+				+ ", email=" + email + ", amount=" + amount + ", point=" + point + ", date=" + date + "]";
 	}
 	
 	public LoginDTO() {
 	}
 	
 	public LoginDTO(String id, String pwd, String name, String hp, String address, String email, int amount, int point,
-			Date date, int admin) {
+			Date date) {
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
@@ -96,7 +90,20 @@ public class LoginDTO {
 		this.amount = amount;
 		this.point = point;
 		this.date = date;
-		this.admin = admin;
+	}
+	public LoginDTO(String id, String pwd, String name, String hp, String address, String email) {
+		this.id = id;
+		this.pwd = pwd;
+		this.name = name;
+		this.hp = hp;
+		this.address = address;
+		this.email = email;
+	}
+	public LoginDTO(String id, String pwd) {
+		this.id = id;
+		this.pwd = pwd;
+		System.out.println(id);
+		System.out.println(this.id);
 	}
 	
 }
