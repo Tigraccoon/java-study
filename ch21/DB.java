@@ -47,7 +47,7 @@ public class DB {
 			String id = prop.getProperty("id");
 			String pwd = prop.getProperty("pwd");
 
-			//MySQL 접속
+			//Oracle 접속
 			conn = DriverManager.getConnection(url, id, pwd);
 
 		} catch (Exception e) {
@@ -57,4 +57,29 @@ public class DB {
 
 		return conn;
 	}
+	
+	public static Connection hrConn() {
+		Connection conn = null;
+
+		try {
+			FileInputStream fis = new FileInputStream("d:\\SQL\\Oracle\\hr.prop");
+			//key와 value를 셋트로 저장
+			Properties prop = new Properties();
+			prop.load(fis);
+
+			String url = prop.getProperty("url");
+			String id = prop.getProperty("id");
+			String pwd = prop.getProperty("pwd");
+
+			//hr 접속
+			conn = DriverManager.getConnection(url, id, pwd);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+		return conn;
+	}
+	
 }

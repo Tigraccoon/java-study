@@ -202,6 +202,8 @@ public class LoginDAO {
 
 		return dto;
 	}
+	
+	
 
 	public int deleteUser(String id) {
 		int result=0;
@@ -245,7 +247,6 @@ public class LoginDAO {
 		return pwd;
 	}
 
-	@SuppressWarnings("unused")
 	public int findUser(String email) {
 		int result = 0;
 		LoginDTO dto = null;
@@ -263,6 +264,7 @@ public class LoginDAO {
 				id = rs.getString("id");
 				pwd = rs.getString("pwd");
 				dto = new LoginDTO(id, pwd);
+				System.out.println("2\t"+dto.toString());
 				result = 1;
 			} else {
 				result = 0;

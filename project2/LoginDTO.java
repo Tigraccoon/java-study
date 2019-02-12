@@ -74,8 +74,8 @@ public class LoginDTO {
 				+ ", email=" + email + ", amount=" + amount + ", point=" + point + ", date=" + date + "]";
 	}
 	
-//	public LoginDTO() {
-//	}
+	public LoginDTO() {
+	}
 	
 	public LoginDTO(String id, String pwd, String name, String hp, String address, String email, int amount, int point,
 			Date date) {
@@ -100,8 +100,6 @@ public class LoginDTO {
 	public LoginDTO(String id, String pwd) {
 		this.id = id;
 		this.pwd = pwd;
-	}
-	public LoginDTO() {
 	}
 	
 }

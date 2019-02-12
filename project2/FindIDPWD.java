@@ -38,11 +38,13 @@ public class FindIDPWD extends JFrame {
 		JButton btnFind = new JButton("Find");
 		btnFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				LoginDTO dto = new LoginDTO();
 				int response=0;
 				String email = tfEmail.getText();
 				LoginDAO dao = new LoginDAO();
+				LoginDTO dto = new LoginDTO();
+				System.out.println("1\t"+dto.toString());
 				response = dao.findUser(email);
+				System.out.println("3\t"+dto.toString());
 				
 				if (response == 1) {
 					String id = dao.getId();
