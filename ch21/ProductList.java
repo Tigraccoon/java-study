@@ -26,7 +26,7 @@ import java.awt.event.ActionEvent;
 public class ProductList extends JFrame {
 
 	private ProductDAO dao;
-	private ProductDTO dto;
+	private ProductDTO2 dto;
 	private Vector<String> col;
 	private DefaultTableModel model;
 	
@@ -287,7 +287,7 @@ public class ProductList extends JFrame {
 		int uprice = Integer.parseInt(tfPrice.getText());
 		int acc = Integer.parseInt(tfAcc.getText());
 		
-		dto = new ProductDTO(product_no, plocal, pname, company, uprice, acc);
+		dto = new ProductDTO2(product_no, plocal, pname, company, uprice, acc);
 	}
 	
 	public void clear() {

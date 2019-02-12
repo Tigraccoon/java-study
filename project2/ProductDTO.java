@@ -41,5 +41,10 @@ public class ProductDTO {
 		this.price = price;
 		this.pamount = pamount;
 	}
+	public ProductDTO(String pname, int price, int pamount) {
+		this.pname = pname;
+		this.price = price;
+		this.pamount = pamount;
+	}
 	
 }

@@ -1,6 +1,6 @@
 package ch21;
 
-public class ProductDTO {
+public class ProductDTO2 {
 	private String product_no;
 	private String plocal;
 	private String pname;
@@ -58,11 +58,10 @@ public class ProductDTO {
 				+ company + ", uprice=" + uprice + ", acc=" + acc + ", sprice=" + sprice + "]";
 	}
 	
-	public ProductDTO() {
+	public ProductDTO2() {
 	}
 	
-	public ProductDTO(String product_no, String plocal, String pname, String company, int uprice, int acc) {
-		super();
+	public ProductDTO2(String product_no, String plocal, String pname, String company, int uprice, int acc) {
 		this.product_no = product_no;
 		this.plocal = plocal;
 		this.pname = pname;

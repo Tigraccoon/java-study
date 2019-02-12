@@ -212,5 +212,53 @@ public class ProductDAO {
 
 		return result;
 	}
-
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public Vector searchProduct(String pname) {
+		Vector items = new Vector();
+		Connection conn = null;
+		PreparedStatement ppsm = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = SqlDB.SqlConn();
+			String sql = "SELECT * FROM product WHERE pname LIKE ? ORDER BY pcode";
+			ppsm = conn.prepareStatement(sql);
+			ppsm.setString(1, "%"+pname+"%");
+			rs = ppsm.executeQuery();
+			
+			while(rs.next()) {
+				Vector row = new Vector();
+				row.add(rs.getInt("pcode"));
+				row.add(rs.getString("pname"));
+				row.add(rs.getInt("price"));
+				row.add(rs.getInt("pamount"));
+				
+				items.add(row);
+				
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (ppsm != null) ppsm.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return items;
+	}
 }

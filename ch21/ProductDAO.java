@@ -58,7 +58,7 @@ public class ProductDAO {
 		return items;
 	}//list
 	
-	public int insertProduct(ProductDTO dto) {
+	public int insertProduct(ProductDTO2 dto) {
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement ppsm = null;
@@ -96,7 +96,7 @@ public class ProductDAO {
 	}//insert
 	
 	
-	public int updateProduct(ProductDTO dto) {
+	public int updateProduct(ProductDTO2 dto) {
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement ppsm = null;

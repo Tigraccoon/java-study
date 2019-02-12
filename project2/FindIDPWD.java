@@ -38,21 +38,18 @@ public class FindIDPWD extends JFrame {
 		JButton btnFind = new JButton("Find");
 		btnFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int response=0;
 				String email = tfEmail.getText();
 				LoginDAO dao = new LoginDAO();
 				LoginDTO dto = new LoginDTO();
-				System.out.println("1\t"+dto.toString());
-				response = dao.findUser(email);
-				System.out.println("3\t"+dto.toString());
+				dto = dao.findUser(email);
 				
-				if (response == 1) {
-					String id = dao.getId();
-					String pwd = dao.getPwd();
+				if (dto.getId() != null || dto.getPwd() != null) {
+					String id = dto.getId();
+					String pwd = dto.getPwd();
 					JOptionPane.showMessageDialog(FindIDPWD.this, "ID : "+id+"\r\n"+"Password : "+pwd, "Here you are~", 
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
-				} else if (response == 0){
+				} else {
 					JOptionPane.showMessageDialog(FindIDPWD.this, "Check your E-Mail", ":-(", JOptionPane.ERROR_MESSAGE);
 				}
 			}

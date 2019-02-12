@@ -112,8 +112,7 @@ public class LoginDAO {
 		return result;
 	}
 
-
-	public int updateUser(LoginDTO dto) {
+	public int updateUserByAdmin(LoginDTO dto) {
 		int result=0;
 		Connection conn = null;
 		PreparedStatement ppsm = null;
@@ -133,6 +132,44 @@ public class LoginDAO {
 			ppsm.setInt(6, dto.getAmount());
 			ppsm.setInt(7, dto.getPoint());
 			ppsm.setString(8, dto.getId());
+
+			result = ppsm.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ppsm != null) ppsm.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+	
+	public int updateUser(LoginDTO dto) {
+		int result=0;
+		Connection conn = null;
+		PreparedStatement ppsm = null;
+
+		try {
+
+			conn = SqlDB.SqlConn();
+			StringBuilder sb = new StringBuilder();
+			//SELECT id,pwd,NAME,hp,address,email,amount,POINT,DATE FROM member ORDER BY id;
+			sb.append("UPDATE member SET pwd=?,NAME=?,hp=?,address=?,email=? WHERE id=?");
+			ppsm = conn.prepareStatement(sb.toString());
+			ppsm.setString(1, dto.getPwd());
+			ppsm.setString(2, dto.getName());
+			ppsm.setString(3, dto.getHp());
+			ppsm.setString(4, dto.getAddress());
+			ppsm.setString(5, dto.getEmail());
+			ppsm.setString(6, dto.getId());
 
 			result = ppsm.executeUpdate();
 		} catch (Exception e) {
@@ -238,17 +275,8 @@ public class LoginDAO {
 		return result;
 	}
 	
-	private String id;		
-	private String pwd;
-	public String getId() {
-		return id;
-	}
-	public String getPwd() {
-		return pwd;
-	}
 
-	public int findUser(String email) {
-		int result = 0;
+	public LoginDTO findUser(String email) {
 		LoginDTO dto = null;
 		Connection conn = null;
 		PreparedStatement ppsm = null;
@@ -261,14 +289,10 @@ public class LoginDAO {
 			ppsm.setString(1, email);
 			rs = ppsm.executeQuery();
 			if(rs.next()) {
-				id = rs.getString("id");
-				pwd = rs.getString("pwd");
+				String id = rs.getString("id");
+				String pwd = rs.getString("pwd");
 				dto = new LoginDTO(id, pwd);
-				System.out.println("2\t"+dto.toString());
-				result = 1;
-			} else {
-				result = 0;
-			}
+			} 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -289,7 +313,7 @@ public class LoginDAO {
 			}
 		}
 
-		return result;
+		return dto;
 	}
 
 }

@@ -111,6 +111,8 @@ public class ScoreList extends JFrame {
 			}
 		});
 		
+		
+		
 		scrollPane.setViewportView(table);
 		
 		JLabel lblStudentNumber = new JLabel("Student Number : ");

@@ -1,7 +1,5 @@
 package project2;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -25,21 +23,6 @@ public class Login extends JFrame {
 	private JTextField tfId;
 	private JPasswordField pfPwd;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login frame = new Login();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -91,10 +74,28 @@ public class Login extends JFrame {
 					if (rs.next()) {
 						if (id.equals("admin")) {
 //							관리자 페이지 출력
+							LoginDAO dao = new LoginDAO();
+							LoginDTO dto = new LoginDTO();
+							dto = dao.viewUser(dto.getId());
+							
+							ProductAdminPage pap = new ProductAdminPage(id);
+							pap.setVisible(true);
+							pap.setLocation(300, 300);
+							
 							System.out.println("관리자");
+							dispose();
 						} else {
 //							유져 페이지 출력
+							LoginDAO dao = new LoginDAO();
+							LoginDTO dto = new LoginDTO();
+							dto = dao.viewUser(dto.getId());
+							
+							ProductUserPage pup = new ProductUserPage(id);
+							pup.setVisible(true);
+							pup.setLocation(300, 300);
+							
 							System.out.println("유져");
+							dispose();
 						}
 					} else {
 						JOptionPane.showMessageDialog(Login.this, "Check your id or password", "Wrong!", JOptionPane.ERROR_MESSAGE);
