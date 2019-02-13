@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-
 public class LoginDAO {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Vector userList() {
@@ -122,7 +121,7 @@ public class LoginDAO {
 			conn = SqlDB.SqlConn();
 			StringBuilder sb = new StringBuilder();
 			//SELECT id,pwd,NAME,hp,address,email,amount,POINT,DATE FROM member ORDER BY id;
-			sb.append("UPDATE member SET pwd=?,NAME=?,hp=?,address=?,email=?,amount=?,point=? WHERE id=?");
+			sb.append("UPDATE member SET pwd=?,NAME=?,hp=?,address=?,email=?,amount=?,point=?,date=? WHERE id=?");
 			ppsm = conn.prepareStatement(sb.toString());
 			ppsm.setString(1, dto.getPwd());
 			ppsm.setString(2, dto.getName());
@@ -131,7 +130,8 @@ public class LoginDAO {
 			ppsm.setString(5, dto.getEmail());
 			ppsm.setInt(6, dto.getAmount());
 			ppsm.setInt(7, dto.getPoint());
-			ppsm.setString(8, dto.getId());
+			ppsm.setDate(8, dto.getDate());
+			ppsm.setString(9, dto.getId());
 
 			result = ppsm.executeUpdate();
 		} catch (Exception e) {
@@ -151,7 +151,7 @@ public class LoginDAO {
 
 		return result;
 	}
-	
+
 	public int updateUser(LoginDTO dto) {
 		int result=0;
 		Connection conn = null;
@@ -239,8 +239,8 @@ public class LoginDAO {
 
 		return dto;
 	}
-	
-	
+
+
 
 	public int deleteUser(String id) {
 		int result=0;
@@ -274,7 +274,7 @@ public class LoginDAO {
 
 		return result;
 	}
-	
+
 
 	public LoginDTO findUser(String email) {
 		LoginDTO dto = null;
@@ -314,6 +314,191 @@ public class LoginDAO {
 		}
 
 		return dto;
+	}
+
+	public int login(String id, String pwd) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement ppsm = null;
+		ResultSet rs = null;
+		try {
+			conn = SqlDB.SqlConn();
+			String sql = "SELECT * FROM member WHERE id = ? AND pwd = ?";
+			ppsm = conn.prepareStatement(sql);
+			ppsm.setString(1, id);
+			ppsm.setString(2, pwd);
+			rs = ppsm.executeQuery();
+
+			if (rs.next()) {
+				result = 1;
+			} else {
+				result = 0;
+			}
+		}catch (Exception e1) {
+			e1.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+			} catch (Exception e3) {
+				e3.printStackTrace();
+			}
+			try {
+				if(ppsm!=null)
+					ppsm.close();
+			} catch (Exception e3) {
+				e3.printStackTrace();
+			}
+			try {
+				if(conn!=null)
+					conn.close();
+			} catch (Exception e3) {
+				e3.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public Vector searchUser(String name) {
+		Vector items = new Vector();
+		Connection conn = null;
+		PreparedStatement ppsm = null;
+		ResultSet rs = null;
+
+		try {
+			conn = SqlDB.SqlConn();
+			String sql = "SELECT * FROM member WHERE name LIKE ? ORDER BY name";
+			ppsm = conn.prepareStatement(sql);
+			ppsm.setString(1, "%"+name+"%");
+			rs = ppsm.executeQuery();
+
+			while(rs.next()) {
+				//				'admin','admin','관리자','000-0000-0000','서울','admin@admin.com',9999999,99999999,NOW()
+				Vector row = new Vector();
+				row.add(rs.getString("id"));
+				row.add(rs.getString("pwd"));
+				row.add(rs.getString("name"));
+				row.add(rs.getString("hp"));
+				row.add(rs.getString("address"));
+				row.add(rs.getString("email"));
+				row.add(rs.getInt("amount"));
+				row.add(rs.getInt("point"));
+				row.add(rs.getDate("date"));
+
+				items.add(row);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(ppsm!=null) ppsm.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return items;
+	}
+
+	public int checkId(String id) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement ppsm = null;
+		ResultSet rs = null;
+		try {
+			conn = SqlDB.SqlConn();
+			//		SELECT id FROM member WHERE id='admin';
+			String sql = "SELECT id FROM member WHERE id=?";
+			ppsm = conn.prepareStatement(sql);
+			ppsm.setString(1, id);
+			rs = ppsm.executeQuery();
+
+			if (rs.next()) {
+				result = 1;
+			} else {
+				result = 0;
+			}
+		}catch (Exception e1) {
+			e1.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+			} catch (Exception e3) {
+				e3.printStackTrace();
+			}
+			try {
+				if(ppsm!=null)
+					ppsm.close();
+			} catch (Exception e3) {
+				e3.printStackTrace();
+			}
+			try {
+				if(conn!=null)
+					conn.close();
+			} catch (Exception e3) {
+				e3.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+	
+	public int checkEmail(String email) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement ppsm = null;
+		ResultSet rs = null;
+		try {
+			conn = SqlDB.SqlConn();
+			//		SELECT id FROM member WHERE id='admin';
+			String sql = "SELECT email FROM member WHERE email=?";
+			ppsm = conn.prepareStatement(sql);
+			ppsm.setString(1, email);
+			rs = ppsm.executeQuery();
+
+			if (rs.next()) {
+				result = 1;
+			} else {
+				result = 0;
+			}
+		}catch (Exception e1) {
+			e1.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)
+					rs.close();
+			} catch (Exception e3) {
+				e3.printStackTrace();
+			}
+			try {
+				if(ppsm!=null)
+					ppsm.close();
+			} catch (Exception e3) {
+				e3.printStackTrace();
+			}
+			try {
+				if(conn!=null)
+					conn.close();
+			} catch (Exception e3) {
+				e3.printStackTrace();
+			}
+		}
+
+		return result;
 	}
 
 }

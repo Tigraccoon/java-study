@@ -9,48 +9,42 @@ import java.util.ArrayList;
 import ch21.DB;
 
 public class DeptDAO {
-	public ArrayList<DeptDTO> listDept(){
-		ArrayList<DeptDTO> items = new ArrayList<>();
-		Connection conn = null;
-		PreparedStatement ppsm = null;
-		ResultSet rs = null;
-		
+	public ArrayList<DeptDTO> listDept() {
+		ArrayList<DeptDTO> items=new ArrayList<>();
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
 		try {
-			conn = DB.hrConn();
-			String sql = "select * from dept order by dname asc";
-			ppsm = conn.prepareStatement(sql);
-			rs = ppsm.executeQuery();
-			
-			while(rs.next()) {
-				int deptno = rs.getInt("deptno");
-				String dname = rs.getString("dname");
-				String loc = rs.getString("loc");
-				DeptDTO dto = new DeptDTO(deptno, dname, loc);
-				items.add(dto);
+			conn=DB.hrConn();//hr계정으로 오라클 DB접속
+			String sql="select * from dept order by dname";
+			pstmt = conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {//다음 레코드가 있으면
+				int deptno=rs.getInt("deptno");
+				String dname=rs.getString("dname");
+				String loc=rs.getString("loc");
+				DeptDTO dto=new DeptDTO(deptno, dname, loc);
+				items.add(dto);//ArrayList에 dto 추가
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (rs != null) rs.close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+				if(rs!=null) rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 			try {
-				if (ppsm != null) ppsm.close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+				if(pstmt!=null) pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 			try {
-				if (conn != null) conn.close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		}
-		
-		
+		}//end finally
 		return items;
 	}
-	
 }

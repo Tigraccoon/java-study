@@ -10,43 +10,40 @@ import ch21.DB;
 
 public class DepartmentDAO {
 	public ArrayList<DepartmentDTO> listDepartment(){
-		ArrayList<DepartmentDTO> items = new ArrayList<>();
-		Connection conn = null;
-		PreparedStatement ppsm = null;
-		ResultSet rs = null;
-		
+		ArrayList<DepartmentDTO> items=new ArrayList<>();
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
 		try {
-			conn = DB.hrConn();
-			String sql = "select * from department order by dname asc";
-			ppsm = conn.prepareStatement(sql);
-			rs = ppsm.executeQuery();
-			
+			conn=DB.hrConn();
+			String sql="select * from department order by dname";
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				int deptno = rs.getInt("deptno");
-				String dname = rs.getString("dname");
-				DepartmentDTO dto = new DepartmentDTO(deptno, dname);
+				int deptno=rs.getInt("deptno");
+				String dname=rs.getString("dname");
+				DepartmentDTO dto=new DepartmentDTO(deptno, dname);
 				items.add(dto);
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (rs != null) rs.close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+				if(rs!=null) rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 			try {
-				if (ppsm != null) ppsm.close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+				if(pstmt!=null) pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 			try {
-				if (conn != null) conn.close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		}
+		}//finally
 		return items;
 	}
 }

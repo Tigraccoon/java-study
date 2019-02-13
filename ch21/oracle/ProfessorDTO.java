@@ -20,11 +20,10 @@ public class ProfessorDTO {
 		return "ProfessorDTO [profno=" + profno + ", name=" + name + "]";
 	}
 	public ProfessorDTO() {
+
 	}
 	public ProfessorDTO(int profno, String name) {
 		this.profno = profno;
 		this.name = name;
 	}
-	
-	
 }

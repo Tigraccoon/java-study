@@ -11,10 +11,9 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
 public class Login extends JFrame {
@@ -52,76 +51,21 @@ public class Login extends JFrame {
 		tfId.setColumns(10);
 
 		pfPwd = new JPasswordField();
+		pfPwd.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					Signin();
+				}
+			}
+		});
 		pfPwd.setBounds(93, 32, 139, 21);
 		contentPane.add(pfPwd);
 
 		JButton btnSignin = new JButton("Sign IN");
 		btnSignin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String id = tfId.getText();
-				String pwd = String.valueOf(pfPwd.getPassword());
-				Connection conn = null;
-				PreparedStatement ppsm = null;
-				ResultSet rs = null;
-				try {
-					conn = SqlDB.SqlConn();
-					String sql = "SELECT * FROM member WHERE id = ? AND pwd = ?";
-					ppsm = conn.prepareStatement(sql);
-					ppsm.setString(1, id);
-					ppsm.setString(2, pwd);
-					rs = ppsm.executeQuery();
-					
-					if (rs.next()) {
-						if (id.equals("admin")) {
-//							관리자 페이지 출력
-							LoginDAO dao = new LoginDAO();
-							LoginDTO dto = new LoginDTO();
-							dto = dao.viewUser(dto.getId());
-							
-							ProductAdminPage pap = new ProductAdminPage(id);
-							pap.setVisible(true);
-							pap.setLocation(300, 300);
-							
-							System.out.println("관리자");
-							dispose();
-						} else {
-//							유져 페이지 출력
-							LoginDAO dao = new LoginDAO();
-							LoginDTO dto = new LoginDTO();
-							dto = dao.viewUser(dto.getId());
-							
-							ProductUserPage pup = new ProductUserPage(id);
-							pup.setVisible(true);
-							pup.setLocation(300, 300);
-							
-							System.out.println("유져");
-							dispose();
-						}
-					} else {
-						JOptionPane.showMessageDialog(Login.this, "Check your id or password", "Wrong!", JOptionPane.ERROR_MESSAGE);
-					}
-				}catch (Exception e1) {
-					e1.printStackTrace();
-				}finally {
-					try {
-						if(rs!=null)
-							rs.close();
-					} catch (Exception e3) {
-						e3.printStackTrace();
-					}
-					try {
-						if(ppsm!=null)
-							ppsm.close();
-					} catch (Exception e3) {
-						e3.printStackTrace();
-					}
-					try {
-						if(conn!=null)
-							conn.close();
-					} catch (Exception e3) {
-						e3.printStackTrace();
-					}
-				}
+				Signin();
 			}
 		});
 		btnSignin.setBounds(12, 60, 220, 23);
@@ -144,10 +88,45 @@ public class Login extends JFrame {
 				FindIDPWD fip = new FindIDPWD();
 				fip.setVisible(true);
 				fip.setLocation(150, 150);
-				
+
 			}
 		});
 		btnidorpwd.setBounds(12, 93, 220, 23);
 		contentPane.add(btnidorpwd);
+	}
+	
+	public void Signin() {
+		int result = 0;
+		String id = tfId.getText();
+		String pwd = String.valueOf(pfPwd.getPassword());
+		LoginDAO dao = new LoginDAO();
+		LoginDTO dto = new LoginDTO();
+		result = dao.login(id, pwd);
+		
+		if (result == 1) {
+			if (id.equals("admin")) {
+				//							관리자 페이지 출력
+				dto = dao.viewUser(dto.getId());
+
+				ProductAdminPage pap = new ProductAdminPage(id);
+				pap.setVisible(true);
+				pap.setLocation(300, 300);
+
+				System.out.println("관리자");
+				dispose();
+			} else {
+				//							유져 페이지 출력
+				dto = dao.viewUser(dto.getId());
+
+				ProductUserPage pup = new ProductUserPage(id);
+				pup.setVisible(true);
+				pup.setLocation(300, 300);
+
+				System.out.println("유져");
+				dispose();
+			}
+		} else {
+			JOptionPane.showMessageDialog(Login.this, "Check your id or password", "Wrong!", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

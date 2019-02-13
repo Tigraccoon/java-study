@@ -9,46 +9,41 @@ import java.util.ArrayList;
 import ch21.DB;
 
 public class ProfessorDAO {
-	public ArrayList<ProfessorDTO> listProfessor() {
-		ArrayList<ProfessorDTO> items = new ArrayList<>();
-		Connection conn = null;
-		PreparedStatement ppsm = null;
-		ResultSet rs = null;
-		
+	public ArrayList<ProfessorDTO> listProfessor(){
+		ArrayList<ProfessorDTO> items=new ArrayList<>();
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
 		try {
-			conn = DB.hrConn();
-			String sql = "select * from dept order by name asc";
-			ppsm = conn.prepareStatement(sql);
-			rs = ppsm.executeQuery();
-			
+			conn=DB.hrConn();//hr계정 접속
+			String sql="select * from professor order by name";
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				int profno = rs.getInt("profno");
-				String name = rs.getString("name");
-				ProfessorDTO dto = new ProfessorDTO(profno, name);
-				items.add(dto);
+				int profno=rs.getInt("profno");
+				String name=rs.getString("name");
+				ProfessorDTO dto=new ProfessorDTO(profno, name);
+				items.add(dto);//ArrayList에 레코드 1건 추가
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (rs != null) rs.close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+				if(rs!=null) rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 			try {
-				if (ppsm != null) ppsm.close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+				if(pstmt!=null) pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 			try {
-				if (conn != null) conn.close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		}
-		
+		}//finally
 		return items;
 	}
-	
 }

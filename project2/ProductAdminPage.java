@@ -203,10 +203,10 @@ public class ProductAdminPage extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int idx = table.getSelectedRow();
 				
-				tfPcode.setText(table.getValueAt(idx, 0)+"");
-				tfPname.setText(table.getValueAt(idx, 1)+"");
-				tfPrice.setText(table.getValueAt(idx, 2)+"");
-				tfPamount.setText(table.getValueAt(idx, 3)+"");
+				tfPcode.setText(String.valueOf(table.getValueAt(idx, 0)));
+				tfPname.setText(String.valueOf(table.getValueAt(idx, 1)));
+				tfPrice.setText(String.valueOf(table.getValueAt(idx, 2)));
+				tfPamount.setText(String.valueOf(table.getValueAt(idx, 3)));
 			}
 		});
 		table.setFont(new Font("굴림", Font.PLAIN, 15));

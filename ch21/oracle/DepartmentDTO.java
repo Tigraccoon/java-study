@@ -20,11 +20,10 @@ public class DepartmentDTO {
 		return "DepartmentDTO [deptno=" + deptno + ", dname=" + dname + "]";
 	}
 	public DepartmentDTO() {
+
 	}
 	public DepartmentDTO(int deptno, String dname) {
 		this.deptno = deptno;
 		this.dname = dname;
 	}
-	
-	
 }

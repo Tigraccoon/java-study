@@ -4,6 +4,7 @@ public class DeptDTO {
 	private int deptno;
 	private String dname;
 	private String loc;
+	//getter,setter, toString, 생성자(기본,파라미터..)
 	public int getDeptno() {
 		return deptno;
 	}
@@ -27,13 +28,11 @@ public class DeptDTO {
 		return "DeptDTO [deptno=" + deptno + ", dname=" + dname + ", loc=" + loc + "]";
 	}
 	public DeptDTO() {
+
 	}
 	public DeptDTO(int deptno, String dname, String loc) {
 		this.deptno = deptno;
 		this.dname = dname;
 		this.loc = loc;
 	}
-	
-	
-	
 }

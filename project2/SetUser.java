@@ -11,6 +11,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 @SuppressWarnings("serial")
 public class SetUser extends JFrame {
@@ -23,21 +25,7 @@ public class SetUser extends JFrame {
 	private JTextField tfAddress;
 	private JTextField tfEmail;
 	private LoginDAO dao = new LoginDAO();
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					SetUser frame = new SetUser();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	private JLabel lblPwdText;
 
 	/**
 	 * Create the frame.
@@ -46,7 +34,7 @@ public class SetUser extends JFrame {
 		setTitle("Your Profile");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 397, 247);
+		setBounds(100, 100, 397, 251);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,6 +72,19 @@ public class SetUser extends JFrame {
 		contentPane.add(tfId);
 		
 		pfPwd = new JPasswordField(dto.getPwd());
+		pfPwd.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				String pwdText = String.valueOf(pfPwd.getPassword());
+				if (pwdText.length() < 4) {
+					lblPwdText.setForeground(Color.RED);
+					lblPwdText.setText("Password < 4");
+				} else {
+					lblPwdText.setForeground(Color.blue);
+					lblPwdText.setText("O");
+				}
+			}
+		});
 		pfPwd.setBounds(127, 35, 116, 21);
 		contentPane.add(pfPwd);
 		
@@ -103,6 +104,7 @@ public class SetUser extends JFrame {
 		contentPane.add(tfAddress);
 		
 		tfEmail = new JTextField(dto.getEmail());
+		tfEmail.setEditable(false);
 		tfEmail.setColumns(10);
 		tfEmail.setBounds(127, 135, 247, 21);
 		contentPane.add(tfEmail);
@@ -112,15 +114,22 @@ public class SetUser extends JFrame {
 		btnDone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int result;
+				int stack=0;
 				String id = tfId.getText();
+				if(id.equals("")) stack++;
 				String pwd = String.valueOf(pfPwd.getPassword());
+				if(pwd.equals("")) stack++;
 				String name = tfName.getText();
+				if(name.equals("")) stack++;
 				String hp = tfHp.getText();
+				if(hp.equals("")) stack++;
 				String address = tfAddress.getText();
+				if(address.equals("")) stack++;
 				String email = tfEmail.getText();
+				if(email.equals(""))stack++;
 				LoginDTO dto2 = new LoginDTO(id, pwd, name, hp, address, email);
 				result = dao.updateUser(dto2);
-				if (result == 1) {//수정 성공시
+				if (result == 1 && stack==0) {//수정 성공시
 					JOptionPane.showMessageDialog(SetUser.this, "Update succeeded!", "Succeeded!", JOptionPane.PLAIN_MESSAGE);
 					dispose();
 				} else {
@@ -147,7 +156,11 @@ public class SetUser extends JFrame {
 				} 
 			}
 		});
-		btnDeleteProfile.setBounds(272, 186, 107, 23);
+		btnDeleteProfile.setBounds(267, 190, 107, 23);
 		contentPane.add(btnDeleteProfile);
+		
+		lblPwdText = new JLabel("");
+		lblPwdText.setBounds(255, 38, 119, 15);
+		contentPane.add(lblPwdText);
 	}
 }
