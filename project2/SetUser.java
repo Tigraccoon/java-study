@@ -146,7 +146,7 @@ public class SetUser extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String id = tfId.getText();
 				int result = 0;
-				int response = JOptionPane.showConfirmDialog(SetUser.this, "Are you sure you want to DELETE your Profile?", "Delete?", JOptionPane.QUESTION_MESSAGE);
+				int response = JOptionPane.showConfirmDialog(SetUser.this, "Are you sure you want to DELETE your Profile?", "Delete?", JOptionPane.YES_NO_OPTION);
 				if (response == JOptionPane.YES_OPTION) {
 					result = dao.deleteUser(id);
 				}
@@ -156,7 +156,7 @@ public class SetUser extends JFrame {
 				} 
 			}
 		});
-		btnDeleteProfile.setBounds(267, 190, 107, 23);
+		btnDeleteProfile.setBounds(238, 190, 136, 23);
 		contentPane.add(btnDeleteProfile);
 		
 		lblPwdText = new JLabel("");

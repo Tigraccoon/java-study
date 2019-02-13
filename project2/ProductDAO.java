@@ -112,6 +112,7 @@ public class ProductDAO {
 			ppsm.setString(1, dto.getPname());
 			ppsm.setInt(2, dto.getPrice());
 			ppsm.setInt(3, dto.getPamount());
+			ppsm.setInt(4, dto.getPcode());
 
 			result = ppsm.executeUpdate();
 		} catch (Exception e) {

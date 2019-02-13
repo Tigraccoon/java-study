@@ -95,7 +95,7 @@ public class ProductAdminPage extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblJavaShop = new JLabel("Java Shop");
+		JLabel lblJavaShop = new JLabel("Java Shop by Admin");
 		lblJavaShop.setBackground(Color.WHITE);
 		lblJavaShop.setHorizontalAlignment(SwingConstants.CENTER);
 		lblJavaShop.setFont(new Font("Consolas", Font.PLAIN, 58));
@@ -214,19 +214,19 @@ public class ProductAdminPage extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JLabel label_2 = new JLabel("상품 코드 : ");
-		label_2.setBounds(12, 413, 64, 15);
+		label_2.setBounds(12, 410, 64, 21);
 		contentPane.add(label_2);
 		
 		JLabel lblNewLabel = new JLabel("상품명 : ");
-		lblNewLabel.setBounds(248, 413, 64, 15);
+		lblNewLabel.setBounds(248, 408, 64, 24);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("가격 : ");
-		lblNewLabel_1.setBounds(12, 447, 59, 15);
+		lblNewLabel_1.setBounds(12, 444, 59, 24);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_3 = new JLabel("수량 : ");
-		lblNewLabel_3.setBounds(248, 447, 57, 15);
+		lblNewLabel_3.setBounds(248, 446, 57, 20);
 		contentPane.add(lblNewLabel_3);
 		
 		tfPcode = new JTextField();
@@ -242,7 +242,7 @@ public class ProductAdminPage extends JFrame {
 		
 		tfPrice = new JTextField();
 		tfPrice.setColumns(10);
-		tfPrice.setBounds(78, 444, 158, 21);
+		tfPrice.setBounds(78, 446, 158, 21);
 		contentPane.add(tfPrice);
 		
 		tfPamount = new JTextField();
@@ -266,7 +266,7 @@ public class ProductAdminPage extends JFrame {
 				refreshTable();
 			}
 		});
-		btnUpdate.setBounds(467, 443, 97, 23);
+		btnUpdate.setBounds(467, 438, 97, 28);
 		contentPane.add(btnUpdate);
 		
 		JButton btnDelete = new JButton("삭제");
@@ -289,7 +289,7 @@ public class ProductAdminPage extends JFrame {
 				
 			}
 		});
-		btnDelete.setBounds(685, 443, 97, 23);
+		btnDelete.setBounds(685, 438, 97, 28);
 		contentPane.add(btnDelete);
 		
 		JButton btnAdd = new JButton("추가");
@@ -309,21 +309,22 @@ public class ProductAdminPage extends JFrame {
 				refreshTable();
 			}
 		});
-		btnAdd.setBounds(576, 443, 97, 23);
+		btnAdd.setBounds(576, 438, 97, 28);
 		contentPane.add(btnAdd);
 		
 		JLabel lblNewLabel_4 = new JLabel("상품 관리");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4.setBounds(455, 413, 315, 15);
+		lblNewLabel_4.setBounds(553, 410, 97, 18);
 		contentPane.add(lblNewLabel_4);
 		
 		JButton btnClear = new JButton("초기화");
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clear();
+				refreshTable();
 			}
 		});
-		btnClear.setBounds(685, 413, 97, 23);
+		btnClear.setBounds(685, 407, 97, 26);
 		contentPane.add(btnClear);
 		refreshTable();
 	}

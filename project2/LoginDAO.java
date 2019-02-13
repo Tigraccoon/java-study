@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+
 public class LoginDAO {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Vector userList() {
@@ -427,9 +428,9 @@ public class LoginDAO {
 			rs = ppsm.executeQuery();
 
 			if (rs.next()) {
-				result = 1;
-			} else {
 				result = 0;
+			} else {
+				result = 1;
 			}
 		}catch (Exception e1) {
 			e1.printStackTrace();
@@ -471,9 +472,9 @@ public class LoginDAO {
 			rs = ppsm.executeQuery();
 
 			if (rs.next()) {
-				result = 1;
-			} else {
 				result = 0;
+			} else {
+				result = 1;
 			}
 		}catch (Exception e1) {
 			e1.printStackTrace();
