@@ -42,6 +42,7 @@ public class Q_1 {
 			save[i]=(int)(pay[i]*0.03);
 		}
 		
+		
 		for(int i=0; i<5;i++) {	//출력
 			for(int j = 0; j < 2 ; j++) {
 				if(j==0) {
