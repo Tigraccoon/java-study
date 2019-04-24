@@ -28,16 +28,8 @@ public class Q_1 {
 		print();
 		
 		for(int i=0; i<5;i++) {	//값 저장
-			if (point[i] >= 50000) {
-				point_use[i] = point[i];
-			} else {
-				point_use[i] = 0;
-			}
-			if (price[i] >= 900000) {
-				fee[i] = 0;
-			} else {
-				fee[i] = 25000;
-			}
+			if (point[i] >= 50000) point_use[i] = point[i];
+			if (price[i] <= 900000) fee[i] = 25000;
 			pay[i]=price[i]+fee[i];
 			save[i]=(int)(pay[i]*0.03);
 		}
